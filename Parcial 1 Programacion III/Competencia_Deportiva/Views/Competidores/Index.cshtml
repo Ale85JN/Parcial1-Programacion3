@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Competencia_Deportiva.Models.Competidores>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Competidores</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+@if (Model.Count() > 0)
+{
+
+   @*  <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Edad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CiudadResidencia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdDisciplina)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CiudadResidencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdDisciplina)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table> *@
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Ciudad de Residencia</th>
+                <th>Disciplina</th>
+                <!-- Puedes agregar más columnas si quieres -->
+                <th></th> <!-- Para botones de acción (Editar, Borrar) -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Edad</td>
+                    <td>@item.CiudadResidencia</td>
+                    <td>@item.IdDisciplina</td> <!-- Aquí podrías mostrar el nombre de la disciplina si lo tienes -->
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Create" class="btn btn-primary">Agregar Nuevo Competidor</a>
+    <p>Hay @Model.Count() Competidores Registrados</p>
+    }
+else
+{
+    <div class="alert alert-info">No hay Competidores Cargados</div>
+}
